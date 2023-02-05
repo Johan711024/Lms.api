@@ -1,20 +1,31 @@
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using Lms.Data.Data;
+using Lms.api.Extensions;
 
 namespace Lms.api
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+            builder.Services.AddDbContext<LmsapiContext>(options =>
+                options.UseSqlServer(builder.Configuration.GetConnectionString("LmsapiContext") ?? throw new InvalidOperationException("Connection string 'LmsapiContext' not found.")));
 
             // Add services to the container.
 
-            builder.Services.AddControllers();
+            builder.Services.AddControllers(opt => opt.ReturnHttpNotAcceptable = true)
+                .AddNewtonsoftJson()
+                .AddXmlDataContractSerializerFormatters();
+
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
             var app = builder.Build();
+
+            await app.SeedDataAsync();
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
