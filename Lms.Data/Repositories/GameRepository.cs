@@ -1,5 +1,6 @@
 ﻿using Lms.Core;
 using Lms.Core.Repositories;
+using Lms.Data.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,13 @@ namespace Lms.Data.Repositories
 {
     public class GameRepository : IGameRepository
     {
+        private readonly LmsapiContext db;
+
+        public GameRepository(LmsapiContext _context)
+        {
+            db = _context;
+        }
+        
         void IGameRepository.Add(Game game)
         {
             throw new NotImplementedException();
