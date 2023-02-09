@@ -1,4 +1,6 @@
-﻿using Lms.Client.Models;
+﻿using Lms.Client.Clients;
+using Lms.Client.Models;
+using Lms.Common.DTOs;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -6,15 +8,23 @@ namespace Lms.Client.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly IHttpClientFactory httpClientFactory;
+        private readonly IGameClient gameClient;
+        private readonly HttpClient HttpClient;
+        
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(IHttpClientFactory httpClientFactory, IGameClient gameClient)
         {
-            _logger = logger;
+            this.httpClientFactory = httpClientFactory;
+            this.gameClient = gameClient;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
+            var res = await gameClient.GetAsync<IEnumerable<GameDto>>("api/events");
+            var res2 = await gameClient.GetAsync<GameDto>("api/events/NewName");
+            var res3 = await gameClient.GetAsync<GameDto>("api/events/NewName/lectures/1");
+
             return View();
         }
 

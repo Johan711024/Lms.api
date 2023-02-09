@@ -28,7 +28,5 @@ namespace Lms.Client.Clients
             return JsonSerializer.Deserialize<T>(stream, new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase});
 
         }
-
-
     }
 }
