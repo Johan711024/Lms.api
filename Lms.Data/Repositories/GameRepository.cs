@@ -1,4 +1,5 @@
-﻿using Lms.Core;
+﻿using Bogus.DataSets;
+using Lms.Core;
 using Lms.Core.Repositories;
 using Lms.Data.Data;
 using Microsoft.EntityFrameworkCore;
@@ -24,21 +25,38 @@ namespace Lms.Data.Repositories
             db.Add(game);
         }
 
-        public async Task<bool> AnyAsync(int id)
+        public async Task<bool> AnyAsync(string title)
         {
-            return await db.Game.AnyAsync(m => m.Id == id);
+            return await db.Game.AnyAsync(m => m.Title == title);
         }
 
-        public async Task<IEnumerable<Game>> GetAllAsync()
+
+
+        public async Task<IEnumerable<Game>> GetAllAsync(string title)
         {
-            return await db.Game.ToListAsync() ?? throw new ArgumentNullException(nameof(db.Game));
+            if (string.IsNullOrWhiteSpace(title))
+            {
+                throw new ArgumentException($"'{nameof(title)}' cannot be null or whitespace.", nameof(title));
+            }
+            
+            var result = await db.Game.Where(g => g.Tournament.Title==title).ToListAsync();
+            return result;
         }
 
-        public async Task<Game> GetAsync(int id)
-        {
-            if (id == null) throw new ArgumentNullException(nameof(id));
 
-            return await db.Game.FirstOrDefaultAsync(m => m.Id == id);
+
+
+        public async Task<Game> GetAsync(string title, int id)
+        {
+            if (string.IsNullOrWhiteSpace(title))
+            {
+                throw new ArgumentException($"'{nameof(title)}' cannot be null or whitespace.", nameof(title));
+            }
+
+            var result = await db.Game.Include(t => t.Tournament).Where(t => t.Id==id).FirstOrDefaultAsync();
+            //var result = await db.Game.FirstOrDefaultAsync(m=>m.Tournament.Title==title && m.Id==id);
+            //var result =await db.Game.Where(m => m.Tournament.Title==title && m.Id==id).FirstOrDefaultAsync(m => m.Id==id);
+            return result;
         }
 
         public void Remove(Game game)

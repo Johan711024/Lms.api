@@ -9,7 +9,9 @@ namespace Lms.Core.Repositories
     public interface ITournamentRepository
     {
         Task<IEnumerable<Tournament>> GetAllAsync(); 
-        Task<Tournament> GetAsync(int id); 
+        Task<Tournament> GetAsync(int id);
+        Task<Tournament> GetByTitleAsyncs(string title);
+        
         Task<bool> AnyAsync(int id); 
         void Add(Tournament tournament); 
         void Update(Tournament tournament); 

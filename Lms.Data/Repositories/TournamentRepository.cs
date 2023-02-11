@@ -36,6 +36,11 @@ namespace Lms.Data.Repositories
             return await db.Tournament.ToListAsync() ?? throw new ArgumentNullException(nameof(db.Tournament));
         }
 
+        public async Task<Tournament> GetByTitleAsyncs(string title)
+        {
+            ArgumentNullException.ThrowIfNull(title, nameof(title));
+            return await db.Tournament.FirstOrDefaultAsync(m => m.Title == title);
+        }
 
         public async Task<Tournament> GetAsync(int id)
         {

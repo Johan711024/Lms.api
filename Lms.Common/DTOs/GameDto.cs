@@ -13,6 +13,8 @@ namespace Lms.Common.DTOs
         public string? Title { get; set; }
         public DateTime Time { get; set; }
 
+        public string? TournamentTitle { get; set; }
+
         //public int TournamentId { get; set; }
     }
 }

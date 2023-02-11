@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Lms.Core
 {
+#nullable disable
     public class Game
     {
         public int Id { get; set; }
@@ -15,5 +16,8 @@ namespace Lms.Core
 
         //Foreign key
         public int TournamentId { get; set; }
+
+        //Nav prop
+        public Tournament Tournament { get; set; }
     }
 }
