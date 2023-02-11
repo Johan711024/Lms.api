@@ -1,6 +1,7 @@
 ﻿using Lms.Core;
 using Lms.Core.Repositories;
 using Lms.Data.Data;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Lms.Data.Repositories
 {
-    internal class TournamentRepository : ITournamentRepository
+    public class TournamentRepository : ITournamentRepository
     {
         private readonly LmsapiContext db;
 
@@ -20,32 +21,36 @@ namespace Lms.Data.Repositories
 
         public void Add(Tournament tournament)
         {
-            throw new NotImplementedException();
+            db.Add(tournament);
         }
 
         public Task<bool> AnyAsync(int id)
         {
-            throw new NotImplementedException();
+            ArgumentNullException.ThrowIfNull(id, nameof(id));
+            return db.Tournament.AnyAsync(m => m.Id == id);
         }
 
-        public Task<IEnumerable<Tournament>> GetAllAsync()
+        public async Task<IEnumerable<Tournament>> GetAllAsync()
         {
-            throw new NotImplementedException();
+
+            return await db.Tournament.ToListAsync() ?? throw new ArgumentNullException(nameof(db.Tournament));
         }
 
-        public Task<Tournament> GetAsync(int id)
+
+        public async Task<Tournament> GetAsync(int id)
         {
-            throw new NotImplementedException();
+            ArgumentNullException.ThrowIfNull(id, nameof(id));
+            return await db.Tournament.FirstOrDefaultAsync(m => m.Id == id);
         }
 
         public void Remove(Tournament tournament)
         {
-            throw new NotImplementedException();
+            db.Remove(tournament);
         }
 
         public void Update(Tournament tournament)
         {
-            throw new NotImplementedException();
+            db.Update(tournament);
         }
     }
 }

@@ -10,6 +10,10 @@ namespace Lms.Client
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
+
+            
+
+
             builder.Services.AddControllersWithViews();
 
             //1.
@@ -18,14 +22,14 @@ namespace Lms.Client
             //2
             builder.Services.AddHttpClient("CodeEventsClient", client =>
             {
-                client.BaseAddress = new Uri("https://localhost:7181");
+                client.BaseAddress = new Uri("https://localhost:7255/");
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             });
 
 
             builder.Services.AddHttpClient("SomeOtherClient", client =>
             {
-                client.BaseAddress = new Uri("");
+                client.BaseAddress = new Uri("https://localhost:7255");
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             });
 
@@ -37,6 +41,7 @@ namespace Lms.Client
             //    client.BaseAddress = new Uri("");
             //});
 
+            
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.

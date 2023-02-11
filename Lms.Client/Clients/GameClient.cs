@@ -10,7 +10,7 @@ namespace Lms.Client.Clients
         public GameClient(HttpClient httpClient) 
         {
             this.httpClient = httpClient;
-            this.httpClient.BaseAddress = new Uri("");
+            this.httpClient.BaseAddress = new Uri("https://localhost:7255/");
             this.httpClient.Timeout = new TimeSpan(0,0,30);
             this.httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }

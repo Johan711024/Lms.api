@@ -8,9 +8,10 @@ using Microsoft.EntityFrameworkCore;
 using Lms.Core;
 using Lms.Data.Data;
 using Lms.Core.Repositories;
-using AutoMapper;
+
 using Lms.Common.DTOs;
 using Microsoft.AspNetCore.JsonPatch;
+using AutoMapper;
 
 namespace Lms.api.Controllers
 {
@@ -32,6 +33,8 @@ namespace Lms.api.Controllers
 
 
 
+
+
         // GET: api/Games
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Game>>> GetGame()
@@ -41,9 +44,10 @@ namespace Lms.api.Controllers
                 return NotFound();
             }
 
-            var games = uow.GameRepository.GetAllAsync();
+            var games = await uow.GameRepository.GetAllAsync();
 
-            var dto = mapper.Map<GameDto>(games);
+            var dto = mapper.Map<IEnumerable<GameDto>>(games);
+            //var dto = mapper.Map<GameDto>(games);
 
 
             return Ok(dto);
@@ -51,14 +55,15 @@ namespace Lms.api.Controllers
 
 
 
+
+
+
+
         // GET: api/Games/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Game>> GetGame(int? id)
         {
-            if (uow.GameRepository.GetAllAsync() == null)
-            {
-                return NotFound();
-            }
+            
             if (id == null)
             {
                 return NotFound();

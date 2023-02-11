@@ -12,18 +12,18 @@ namespace Lms.Data.Repositories
     {
         private readonly LmsapiContext db;
 
+        public ITournamentRepository TournamentRepository { get; private set; }
+        public IGameRepository GameRepository { get; private set; }
+
         public UnitOfWork(LmsapiContext context)
         {
             db = context;
+            TournamentRepository = new TournamentRepository(db);
+            GameRepository = new GameRepository(db);
         }
-
-        IGameRepository IUnitOfWork.GameRepository => throw new NotImplementedException();
-
-        ITournamentRepository IUnitOfWork.TournamentRepository => throw new NotImplementedException();
-
-        Task IUnitOfWork.CompleteAsync()
+        public async Task CompleteAsync()
         {
-            throw new NotImplementedException();
+            await db.SaveChangesAsync();
         }
     }
 }

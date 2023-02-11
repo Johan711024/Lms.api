@@ -1,6 +1,7 @@
 ﻿using Lms.Core;
 using Lms.Core.Repositories;
 using Lms.Data.Data;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,35 +18,37 @@ namespace Lms.Data.Repositories
         {
             db = _context;
         }
-        
-        void IGameRepository.Add(Game game)
+
+        public void Add(Game game)
         {
-            throw new NotImplementedException();
+            db.Add(game);
         }
 
-        Task<bool> IGameRepository.AnyAsync(int id)
+        public async Task<bool> AnyAsync(int id)
         {
-            throw new NotImplementedException();
+            return await db.Game.AnyAsync(m => m.Id == id);
         }
 
-        Task<IEnumerable<Game>> IGameRepository.GetAllAsync()
+        public async Task<IEnumerable<Game>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            return await db.Game.ToListAsync() ?? throw new ArgumentNullException(nameof(db.Game));
         }
 
-        Task<Game> IGameRepository.GetAsync(int id)
+        public async Task<Game> GetAsync(int id)
         {
-            throw new NotImplementedException();
+            if (id == null) throw new ArgumentNullException(nameof(id));
+
+            return await db.Game.FirstOrDefaultAsync(m => m.Id == id);
         }
 
-        void IGameRepository.Remove(Game game)
+        public void Remove(Game game)
         {
-            throw new NotImplementedException();
+            db.Remove(game);
         }
 
-        void IGameRepository.Update(Game game)
+        public void Update(Game game)
         {
-            throw new NotImplementedException();
+            db.Update(game);
         }
     }
 }

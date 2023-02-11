@@ -2,6 +2,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Lms.Data.Data;
 using Lms.api.Extensions;
+using Lms.Core.Repositories;
+using Lms.Data.Repositories;
 
 namespace Lms.api
 {
@@ -15,13 +17,22 @@ namespace Lms.api
 
             // Add services to the container.
 
+            builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+
             builder.Services.AddControllers(opt => opt.ReturnHttpNotAcceptable = true)
                 .AddNewtonsoftJson()
                 .AddXmlDataContractSerializerFormatters();
 
+
+
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+
+            
+
+            builder.Services.AddAutoMapper(typeof(MapperProfile));
+
 
             var app = builder.Build();
 
