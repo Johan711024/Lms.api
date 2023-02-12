@@ -52,6 +52,15 @@ namespace Lms.api
 
             app.MapControllers();
 
+
+            // CORS - Allow calling the API from WebBrowsers
+            app.UseCors(x => x
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+                .AllowCredentials()
+                //.WithOrigins("https://localhost:44351")); // Allow only this origin can also have multiple origins seperated with comma
+                .SetIsOriginAllowed(origin => true));// Allow any origin  
+
             app.Run();
         }
     }

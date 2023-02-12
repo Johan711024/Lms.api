@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lms.Client", "Lms.Client\Lm
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lms.Common", "Lms.Common\Lms.Common.csproj", "{92AAB93D-811E-482B-9327-12B1805E8308}"
 EndProject
+Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "lms.ReactClient", "Lms.React\lms.ReactClient.esproj", "{0065746B-7B91-49C6-9E9D-1B81EE518903}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,12 @@ Global
 		{92AAB93D-811E-482B-9327-12B1805E8308}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{92AAB93D-811E-482B-9327-12B1805E8308}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{92AAB93D-811E-482B-9327-12B1805E8308}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0065746B-7B91-49C6-9E9D-1B81EE518903}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0065746B-7B91-49C6-9E9D-1B81EE518903}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0065746B-7B91-49C6-9E9D-1B81EE518903}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{0065746B-7B91-49C6-9E9D-1B81EE518903}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0065746B-7B91-49C6-9E9D-1B81EE518903}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0065746B-7B91-49C6-9E9D-1B81EE518903}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

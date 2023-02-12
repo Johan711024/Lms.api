@@ -1,8 +1,22 @@
-﻿@{
+﻿@model IEnumerable<Lms.Common.DTOs.TournamentDto>
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<h1>Turneringar</h1>
+
+<div style="display:flex; height: 300px;">
+    <div style="width: 300px;height: 100px;margin: auto;">
+@foreach (var item in Model) {
+<p>
+        <Button data-id="@item.Title" class="game" id="@item.Title" style="width:300px">@item.Title</Button>    
+</p>
+}
 </div>
+
+    <div id="result" style="width: 300px;margin: auto;background-color: #f0f0f0"></div>
+</div>
+<script type="module" src="/js/Games.js"></script>
+
+

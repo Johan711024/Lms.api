@@ -21,14 +21,14 @@ namespace Lms.Client.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var res = await gameClient.GetAsync<IEnumerable<GameDto>>("api/tournaments");
+            var res = await gameClient.GetAsync<IEnumerable<TournamentDto>>("api/tournaments");
 
-            var res2 = await gameClient.GetAsync<IEnumerable<GameDto>>("api/games");
+            var res2 = await gameClient.GetAsync<IEnumerable<GameDto>>("api/tournaments/johnny/games");
 
             //var res2 = await gameClient.GetAsync<GameDto>("api/events/NewName");
             //var res3 = await gameClient.GetAsync<GameDto>("api/events/NewName/lectures/1");
 
-            return View();
+            return View(res);
         }
 
         public IActionResult Privacy()
