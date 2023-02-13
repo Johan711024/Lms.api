@@ -1,9 +1,9 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { RootState, AppThunk } from '../../app/store'
 
-import { doFetchGameApi } from './gameApi'
+import { doFetchTournamentApi } from './tournamentApi'
 
-export interface GameState {  
+export interface TournamentState {  
     //förstår ej 'value'. Vet inte var eller hur den sätts men den måste vara med för att det ska fungera.
     value: Array<any>
     status: 'idle' | 'loading' | 'failed'
@@ -11,55 +11,55 @@ export interface GameState {
 
 
 
-const initialState: GameState = {    
+const initialState: TournamentState = {    
     value: [],
     status: 'idle',
     
 }
 
-export const getAsyncGame = createAsyncThunk(
-    'game/fetchGame',
+export const getAsyncTournament = createAsyncThunk(
+    'tournament/fetchTournament',
     async (url:string) => {
         console.log('createThunk')
-        const response = await doFetchGameApi(url)
+        const response = await doFetchTournamentApi(url)
 
         //Se upp! Vanlig bugg. Om det skickas med en node i api som börjar med 'data' ska det stå response.data istället...
         return response
     }
 )
 
-export const gameSlice = createSlice({
-    name: 'Game',
+export const tournamentSlice = createSlice({
+    name: 'tournament',
     initialState,
     reducers: {
 
     },
     extraReducers: (builder) => {
         builder
-            .addCase(getAsyncGame.pending, (state) => {
+            .addCase(getAsyncTournament.pending, (state) => {
                 state.status = 'loading'
             })
-            .addCase(getAsyncGame.fulfilled, (state, action:any) => {
+            .addCase(getAsyncTournament.fulfilled, (state, action:any) => {
                 console.log('hello ' + JSON.stringify(action))
                 state.status = 'idle'
                 state.value = action.payload
                 
 
             })
-            .addCase(getAsyncGame.rejected, (state) => {
+            .addCase(getAsyncTournament.rejected, (state) => {
                 state.status = 'failed'
             })
         }
     })
 
 
-export const selectGame = (state: RootState) => {
-    //game är ifrån 'store'
-    const { value } = state.game
+export const selectTournament = (state: RootState) => {
+    //tournament är ifrån 'store'
+    const { value } = state.tournament
     //returnerar 'value' till txs...där den refaktoreras till sina underliggande beståndsdelar... Titta i redux-tools
     return value
 
 }
 
 
-export default gameSlice.reducer
+export default tournamentSlice.reducer
