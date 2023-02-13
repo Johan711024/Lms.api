@@ -1,0 +1,14 @@
+.Container {
+    display: flex;
+    height: 300px;
+}
+.Tournaments {
+    width: 300px;
+    height: 100px;
+    margin: auto;
+}
+.Games {
+    width: 300px;
+    height: 100px;
+    margin: auto;
+}
