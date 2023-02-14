@@ -1,6 +1,16 @@
 .Game {
-    width: 300px;
-    height: 100px;
+    width: 50%;
+    height: 90vh;
     margin: auto;
+
+    border: 1px solid black;
     
+}
+
+
+.Game div {
+    border: 1px solid black;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
 }

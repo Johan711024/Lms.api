@@ -42,7 +42,7 @@ export const gameSlice = createSlice({
             .addCase(getAsyncGame.fulfilled, (state, action:any) => {
                 console.log('hello ' + JSON.stringify(action))
                 state.status = 'idle'
-                state.value = action.payload
+                state.value = [...action.payload]
                 
 
             })

@@ -20,7 +20,7 @@ const initialState: TournamentState = {
 export const getAsyncTournament = createAsyncThunk(
     'tournament/fetchTournament',
     async (url:string) => {
-        console.log('createThunk')
+        //console.log('createThunk')
         const response = await doFetchTournamentApi(url)
 
         //Se upp! Vanlig bugg. Om det skickas med en node i api som börjar med 'data' ska det stå response.data istället...
@@ -40,9 +40,9 @@ export const tournamentSlice = createSlice({
                 state.status = 'loading'
             })
             .addCase(getAsyncTournament.fulfilled, (state, action:any) => {
-                console.log('hello ' + JSON.stringify(action))
+                //console.log('action ' + JSON.stringify(action))
                 state.status = 'idle'
-                state.value = action.payload
+                state.value = [...action.payload]
                 
 
             })

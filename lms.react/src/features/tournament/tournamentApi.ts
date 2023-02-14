@@ -7,7 +7,7 @@ export const doFetchTournamentApi = async (parametersUrl: string) => {
 
     let url = `https://localhost:7255/api${parametersUrl}`
 
-    console.log(url)
+    //console.log(url)
 
     const response = await fetch(
         url,
